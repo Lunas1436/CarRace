@@ -1,0 +1,24 @@
+# Unreal Engine 自動生成フォルダ（除外する）
+Binaries/
+Build/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+.vscode/
+
+# Visual Studio ファイル
+*.sln
+*.aps
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.bk
+*.VC.db
+*.opensdf
+*.opendb
+
+# ユーザー設定ファイル
+*.user
