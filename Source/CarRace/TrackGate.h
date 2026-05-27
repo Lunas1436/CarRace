@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/SceneComponent.h"
+#include "Components/BoxComponent.h"
 #include "TrackGate.generated.h"
 
 UCLASS()
@@ -22,5 +24,21 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+
+public:
+	UPROPERTY(VisibleAnywhere)
+	USceneComponent* RootComp;
+
+	UPROPERTY(VisibleAnywhere)
+	UBoxComponent* CollisionBoxComp;
+	
+	// 
+	UPROPERTY(VisibleAnywhere, Category = "TrackGate")
+	int32 nGateIndex = 0;
+
+	// ÉSÅ[ÉãîªíËóp
+	UPROPERTY(EditAnywhere, Category = "TrackGate")
+	bool bIsFinishLine;
 
 };

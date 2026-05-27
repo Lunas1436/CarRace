@@ -9,6 +9,16 @@ ATrackGate::ATrackGate()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	RootComp = CreateDefaultSubobject<USceneComponent>(TEXT("RootComp"));
+	SetRootComponent(RootComp);
+
+	CollisionBoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBoxComp"));
+	CollisionBoxComp->SetupAttachment(RootComp);
+	CollisionBoxComp->SetBoxExtent(FVector(1000.0f));
+	CollisionBoxComp->SetLineThickness(32.0f);
+	CollisionBoxComp->bHiddenInGame = false;
+	CollisionBoxComp->SetCollisionProfileName(FName("OverlapAllDynamic"));
+
 }
 
 // Called when the game starts or when spawned
