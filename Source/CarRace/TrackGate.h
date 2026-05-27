@@ -39,6 +39,6 @@ public:
 
 	// ƒS[ƒ‹”»’è—p
 	UPROPERTY(EditAnywhere, Category = "TrackGate")
-	bool bIsFinishLine;
+	bool bIsFinishLine = false;
 
 };

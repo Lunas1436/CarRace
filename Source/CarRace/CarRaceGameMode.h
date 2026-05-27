@@ -7,7 +7,7 @@
 #include "CarRaceGameMode.generated.h"
 
 UCLASS(abstract)
-class ACarRaceGameMode : public AGameModeBase
+class CARRACE_API ACarRaceGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
