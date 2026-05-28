@@ -26,6 +26,7 @@ void ATrackGate::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	CollisionBoxComp->OnComponentHit.AddDynamic(this, &ATrackGate::OnHit);
 }
 
 // Called every frame
@@ -33,5 +34,10 @@ void ATrackGate::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ATrackGate::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+{
+	UE_LOG(LogTemp, Display, TEXT("オーバーラップ"));
 }
 

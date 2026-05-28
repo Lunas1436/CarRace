@@ -18,8 +18,4 @@ public:
 
 	ACarRaceSportsCar();
 
-public:
-	UPROPERTY(VisibleAnywhere)
-	int32 NextGateIndex = 0;
-
 };
