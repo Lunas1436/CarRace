@@ -26,7 +26,7 @@ void ATrackGate::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	CollisionBoxComp->OnComponentHit.AddDynamic(this, &ATrackGate::OnHit);
+	CollisionBoxComp->OnComponentBeginOverlap.AddDynamic(this, &ATrackGate::OnOverlapBegin);
 }
 
 // Called every frame
@@ -36,8 +36,12 @@ void ATrackGate::Tick(float DeltaTime)
 
 }
 
-void ATrackGate::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
+void ATrackGate::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
+	bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp, Display, TEXT("オーバーラップ"));
+	
+
+
 }
 
