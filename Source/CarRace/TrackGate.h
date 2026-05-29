@@ -25,6 +25,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void SetGateIndex(int32 Index);
+	int32 GetGateIndex();
+
 
 public:
 	UPROPERTY(VisibleAnywhere)
@@ -33,7 +36,7 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UBoxComponent* CollisionBoxComp;
 	
-	// 
+	// ゲートインデックス
 	UPROPERTY(VisibleAnywhere, Category = "TrackGate")
 	int32 nGateIndex = 0;
 

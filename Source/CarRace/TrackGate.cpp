@@ -41,7 +41,18 @@ void ATrackGate::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 	bool bFromSweep, const FHitResult& SweepResult)
 {
 	
-
-
 }
+
+void ATrackGate::SetGateIndex(Index)
+{
+	GateIndex = Index;
+}
+
+int32 ATrackGate::GetGateIndex()
+{
+	return GateIndex;
+}
+
+
+
 
