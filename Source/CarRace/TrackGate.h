@@ -38,7 +38,7 @@ public:
 	
 	// ゲートインデックス
 	UPROPERTY(VisibleAnywhere, Category = "TrackGate")
-	int32 nGateIndex = 0;
+	int32 GateIndex = 0;
 
 	// ゴール判定用
 	UPROPERTY(EditAnywhere, Category = "TrackGate")

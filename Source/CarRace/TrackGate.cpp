@@ -43,7 +43,7 @@ void ATrackGate::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 	
 }
 
-void ATrackGate::SetGateIndex(Index)
+void ATrackGate::SetGateIndex(int32 Index)
 {
 	GateIndex = Index;
 }

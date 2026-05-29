@@ -15,6 +15,22 @@ class CARRACE_API ACarRaceGameMode : public AGameModeBase
 
 public:
 	ACarRaceGameMode();
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
+public:
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+public:
+	UPROPERTY(EditAnywhere)
+	ACourseSpline* CourseSplineActor = NULL;
+
+	UPROPERTY(VisibleAnywhere)
+	TArray<AActor*> TrackGateArray;
+
 };
 
 
