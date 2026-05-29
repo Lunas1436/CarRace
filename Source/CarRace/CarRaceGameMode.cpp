@@ -15,6 +15,13 @@ void ACarRaceGameMode::BeginPlay()
 	Super::BeginPlay();
 
 	// CourseSplineに沿ってTrackGateにインデックス付与
+	TArray<AActor*> SplineActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ACourseSpline::StaticClass(), SplineActors);
+	if (SplineActors.IsEmpty()) {
+		UE_LOG(LogTemp, Warning, TEXT("There is no CourseSpline"));
+		return;
+	}
+	ACourseSpline* CourseSplineActor = Cast<ACourseSpline>(SplineActors[0]);
 	if (CourseSplineActor) {
 		USplineComponent* CourseSplineComp = CourseSplineActor->SplineComp;
 		if (CourseSplineComp) {

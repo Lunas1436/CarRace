@@ -25,9 +25,6 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 public:
-	UPROPERTY(EditAnywhere)
-	ACourseSpline* CourseSplineActor = NULL;
-
 	UPROPERTY(VisibleAnywhere)
 	TArray<AActor*> TrackGateArray;
 
