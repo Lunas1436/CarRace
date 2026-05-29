@@ -23,4 +23,15 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void SetGateIndex(int32 Index);
+	int32 GetGateIndex();
+
+
+public:
+	UPROPERTY(VisibleAnywhere)
+	int32 GateIndex = 0;
+
+	UPROPERTY(VisibleAnywhere)
+	bool bIsFinishLine = false;
+
 };

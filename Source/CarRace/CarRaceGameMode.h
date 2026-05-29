@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
+#include "CourseSpline.h"
+#include "TrackGate.h"
 #include "CarRaceGameMode.generated.h"
 
 UCLASS(abstract)
@@ -13,6 +15,15 @@ class ACarRaceGameMode : public AGameModeBase
 
 public:
 	ACarRaceGameMode();
+
+public:
+	UPROPERTY(EditAnywhere)
+	ACourseSpline* CourseSpline = NULL;
+
+	UPROPERTY(VisibleAnywhere)
+	TArray<AActor*> TrackGateArray;
+
+
 };
 
 

@@ -25,3 +25,14 @@ void ATrackGate::Tick(float DeltaTime)
 
 }
 
+void ATrackGate::SetGateIndex(int32 Index)
+{
+	GateIndex = Index;
+}
+
+int32 ATrackGate::GetGateIndex()
+{
+	return GateIndex;
+}
+
+
