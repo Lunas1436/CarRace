@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/SceneComponent.h"
+#include "Components/BoxComponent.h"
 #include "TrackGate.generated.h"
 
 UCLASS()
@@ -23,15 +25,24 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void SetGateIndex(int32 Index);
-	int32 GetGateIndex();
-
 
 public:
 	UPROPERTY(VisibleAnywhere)
-	int32 GateIndex = 0;
+	USceneComponent* RootComp;
 
 	UPROPERTY(VisibleAnywhere)
+	UBoxComponent* CollisionBoxComp;
+	
+	// 
+	UPROPERTY(VisibleAnywhere, Category = "TrackGate")
+	int32 nGateIndex = 0;
+
+	// ÉSÅ[ÉãîªíËóp
+	UPROPERTY(EditAnywhere, Category = "TrackGate")
 	bool bIsFinishLine = false;
+
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 };
