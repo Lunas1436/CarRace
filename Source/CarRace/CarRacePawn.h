@@ -20,7 +20,7 @@ struct FInputActionValue;
  *  Specific vehicle configurations are handled in subclasses.
  */
 UCLASS(abstract)
-class ACarRacePawn : public AWheeledVehiclePawn
+class CARRACE_API ACarRacePawn : public AWheeledVehiclePawn
 {
 	GENERATED_BODY()
 
@@ -178,4 +178,20 @@ public:
 	FORCEINLINE UCameraComponent* GetBackCamera() const { return BackCamera; }
 	/** Returns the cast Chaos Vehicle Movement subobject */
 	FORCEINLINE const TObjectPtr<UChaosWheeledVehicleMovementComponent>& GetChaosVehicleMovement() const { return ChaosVehicleMovement; }
+
+public:
+	void SetCurrentGateIndex(int32 GateIndex);
+	int32 GetCurrentGateIndex();
+
+	void SetCurrentLapCount(int32 LapCount);
+	int32 GetCurrentLapCount();
+
+public:
+	UPROPERTY(VisibleAnywhere, Category = "CarRace")
+	int32 CurrentLapCount = 0;
+
+	UPROPERTY(VisibleAnywhere, Category = "CarRace")
+	int32 CurrentGateIndex = 0;
+
+
 };

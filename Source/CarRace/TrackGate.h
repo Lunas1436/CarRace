@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/SceneComponent.h"
 #include "Components/BoxComponent.h"
-#include "WheeledVehiclePawn.h"
+#include "CarRacePawn.h"
 #include "TrackGate.generated.h"
 
 UCLASS()
@@ -39,7 +39,7 @@ public:
 		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 protected:
-	void ProcessLapCount(AWheeledVehiclePawn* OtherActor);
+	void ProcessLapCount(ACarRacePawn* OtherActor);
 
 	void ProcessRaceFinish();
 

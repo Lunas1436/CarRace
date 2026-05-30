@@ -42,7 +42,7 @@ void ACarRaceGameMode::BeginPlay()
 				if (Gate) {
 					Gate->SetGateIndex(i);
 					Gate->SetGateCount(TrackGateCount);
-					Gate->MaxLap = 3;
+					Gate->MaxLap = 1;
 					if (i == 0) {
 						Gate->SetIsFinieshGate(true);
 					}

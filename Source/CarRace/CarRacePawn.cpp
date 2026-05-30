@@ -255,4 +255,24 @@ void ACarRacePawn::DoResetVehicle()
 	GetMesh()->SetPhysicsLinearVelocity(FVector::ZeroVector);
 }
 
+void ACarRacePawn::SetCurrentLapCount(int32 LapCount)
+{
+	CurrentLapCount = LapCount;
+}
+
+int32 ACarRacePawn::GetCurrentLapCount()
+{
+	return CurrentLapCount;
+}
+
+void ACarRacePawn::SetCurrentGateIndex(int32 GateIndex)
+{
+	CurrentGateIndex = GateIndex;
+}
+
+int32 ACarRacePawn::GetCurrentGateIndex()
+{
+	return CurrentGateIndex;
+}
+
 #undef LOCTEXT_NAMESPACE
