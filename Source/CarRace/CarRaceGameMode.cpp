@@ -35,12 +35,17 @@ void ACarRaceGameMode::BeginPlay()
 				float DistB = CourseSplineComp->GetDistanceAlongSplineAtSplineInputKey(KeyB);
 
 				return DistA < DistB;
-				});
+			});
 
 			for (int32 i = 0; i < TrackGateCount; i++) {
 				ATrackGate* Gate = Cast<ATrackGate>(TrackGateArray[i]);
 				if (Gate) {
 					Gate->SetGateIndex(i);
+					Gate->SetGateCount(TrackGateCount);
+					Gate->MaxLap = 3;
+					if (i == 0) {
+						Gate->SetIsFinieshGate(true);
+					}
 				}
 			}
 		}

@@ -36,13 +36,6 @@ void ATrackGate::Tick(float DeltaTime)
 
 }
 
-void ATrackGate::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
-	bool bFromSweep, const FHitResult& SweepResult)
-{
-	
-}
-
 void ATrackGate::SetGateIndex(int32 Index)
 {
 	GateIndex = Index;
@@ -52,6 +45,62 @@ int32 ATrackGate::GetGateIndex()
 {
 	return GateIndex;
 }
+
+void ATrackGate::SetGateCount(int32 Count)
+{
+	GateCount = Count;
+}
+
+int32 ATrackGate::GetGateCount()
+{
+	return GateCount;
+}
+
+void ATrackGate::SetIsFinieshGate(bool bFlg)
+{
+	bIsFinishGate = bFlg;
+}
+
+void ATrackGate::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
+	bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor && OtherActor != this) {
+		AWheeledVehiclePawn* CarPawn = Cast<AWheeledVehiclePawn>(OtherActor);
+		if (CarPawn) {
+			// ゲートインデックス判定
+			int32 CarPawnGateIndex = CarPawn->GetCurrentGateIndex();
+			if (CarPawnGateIndex == GateIndex) { // 通過OK
+				CarPawnGateIndex++;
+				ProcessLapCount(CarPawn);
+			}
+			else if(CarPawnGateIndex < GateIndex) { // 正しいコースに戻るように指示
+				UE_LOG(LogTemp, Display, TEXT("Go back to the CORRECT GATE"));
+			}
+		}
+	}
+}
+
+// ラップ処理
+void ATrackGate::ProcessLapCount(AWheeledVehiclePawn* OtherActor)
+{
+	int32 CarPawnLapCount = OtherActor->GetCurrentLapCount();
+	CarPawnLapCount++;
+	if (CarPawnLapCount >= MaxLap) {
+		// ゴール
+		ProcessRaceFinish();
+	}
+	else {
+		OtherActor->SetCurrentGateIndex(0);
+	}
+}
+
+void ATrackGate::ProcessRaceFinish()
+{
+	UE_LOG(LogTemp, Display, TEXT("Race Finish!!"));
+}
+
+
 
 
 

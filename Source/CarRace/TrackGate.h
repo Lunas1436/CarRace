@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/SceneComponent.h"
 #include "Components/BoxComponent.h"
+#include "WheeledVehiclePawn.h"
 #include "TrackGate.generated.h"
 
 UCLASS()
@@ -28,6 +29,20 @@ public:
 	void SetGateIndex(int32 Index);
 	int32 GetGateIndex();
 
+	void SetGateCount(int32 Count);
+	int32 GetGateCount();
+
+	void SetIsFinieshGate(bool bFlg);
+
+	UFUNCTION()
+	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+protected:
+	void ProcessLapCount(AWheeledVehiclePawn* OtherActor);
+
+	void ProcessRaceFinish();
+
 
 public:
 	UPROPERTY(VisibleAnywhere)
@@ -36,16 +51,20 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UBoxComponent* CollisionBoxComp;
 	
+	UPROPERTY(VisibleAnywhere, Category = "Lap")
+	int32 MaxLap = 0;
+
 	// ゲートインデックス
 	UPROPERTY(VisibleAnywhere, Category = "TrackGate")
 	int32 GateIndex = 0;
 
+	UPROPERTY(VisibleAnywhere, Category = "TrackGate")
+	int32 GateCount = 0;
+
 	// ゴール判定用
 	UPROPERTY(EditAnywhere, Category = "TrackGate")
-	bool bIsFinishLine = false;
+	bool bIsFinishGate = false;
 
-	UFUNCTION()
-	void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, 
-		UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
 
 };
