@@ -1,7 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "CarRaceGameMode.h"
-#include "Kismet/GameplayStatics.h"
 #include "CarRacePlayerController.h"
 
 ACarRaceGameMode::ACarRaceGameMode()
@@ -50,6 +49,26 @@ void ACarRaceGameMode::BeginPlay()
 			}
 		}
 	}
+
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	if (PlayerController) {
+		ScreenMessageWidget = CreateWidget<UScreenMessage>(PlayerController, ScreenMessageClass);
+		if (ScreenMessageWidget) {
+			ScreenMessageWidget->AddToPlayerScreen();
+			ScreenMessageWidget->SetMessageText("Get Ready?");
+		}
+	}
+
+	CountdownSeconds = CountdownDelay;
+	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &ACarRaceGameMode::OnCountdownTimerTimeout, 1.0f, true);
+	
+
+	// BGM
+	UGameplayStatics::PlaySound2D(
+		GetWorld(),
+		RaceBGM
+	);
+
 }
 
 // Called every frame
@@ -57,4 +76,28 @@ void ACarRaceGameMode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ACarRaceGameMode::OnCountdownTimerTimeout()
+{
+	if (CountdownSeconds > 0) {
+		ScreenMessageWidget->SetMessageText(FString::FromInt(CountdownSeconds));
+	}
+	else if (CountdownSeconds == 0) {
+		APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+		if (PlayerController) {
+			ACarRacePawn *Car = Cast<ACarRacePawn>(PlayerController->GetPawn());
+			if (Car) {
+				Car->SetStartedFlg(true);
+			}
+		}
+
+		ScreenMessageWidget->SetMessageText("Get Ready?");
+	}
+	else {
+		GetWorldTimerManager().ClearTimer(CountdownTimerHandle);
+		ScreenMessageWidget->SetVisibility(ESlateVisibility::Hidden);
+	}
+
+	CountdownSeconds--;
 }

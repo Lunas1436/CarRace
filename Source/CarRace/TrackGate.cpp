@@ -70,7 +70,7 @@ void ATrackGate::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 		if (CarPawn) {
 			// ゲートインデックス判定
 			int32 CarPawnGateIndex = CarPawn->GetCurrentGateIndex();
-			if (CarPawnGateIndex == GateIndex) { // 通過OK
+			if (CarPawnGateIndex == GateIndex && GateCount > 0) { // 通過OK
 				CarPawnGateIndex = (CarPawnGateIndex + 1) % GateCount;
 				CarPawn->SetCurrentGateIndex(CarPawnGateIndex);
 

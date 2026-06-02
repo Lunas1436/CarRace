@@ -186,6 +186,8 @@ public:
 	void SetCurrentLapCount(int32 LapCount);
 	int32 GetCurrentLapCount();
 
+	void SetStartedFlg(bool bFlg);
+
 public:
 	UPROPERTY(VisibleAnywhere, Category = "CarRace")
 	int32 CurrentLapCount = 0;
@@ -193,5 +195,7 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "CarRace")
 	int32 CurrentGateIndex = 0;
 
+	UPROPERTY(VisibleAnywhere, Category = "CarRace")
+	bool bRaceStarted = false;
 
 };

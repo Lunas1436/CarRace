@@ -51,7 +51,7 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	UBoxComponent* CollisionBoxComp;
 	
-	UPROPERTY(VisibleAnywhere, Category = "Lap")
+	UPROPERTY(EditAnywhere, Category = "Lap")
 	int32 MaxLap = 0;
 
 	// ゲートインデックス

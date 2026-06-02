@@ -114,6 +114,9 @@ void ACarRacePawn::Steering(const FInputActionValue& Value)
 
 void ACarRacePawn::Throttle(const FInputActionValue& Value)
 {
+	// Šm”F—p
+	if (!bRaceStarted) return;
+
 	// route the input
 	DoThrottle(Value.Get<float>());
 }
@@ -273,6 +276,11 @@ void ACarRacePawn::SetCurrentGateIndex(int32 GateIndex)
 int32 ACarRacePawn::GetCurrentGateIndex()
 {
 	return CurrentGateIndex;
+}
+
+void ACarRacePawn::SetStartedFlg(bool bFlg)
+{
+	bRaceStarted = bFlg;
 }
 
 #undef LOCTEXT_NAMESPACE
