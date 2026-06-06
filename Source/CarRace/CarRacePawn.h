@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "WheeledVehiclePawn.h"
+#include "Components/AudioComponent.h"
 #include "CarRacePawn.generated.h"
 
 class UCameraComponent;
@@ -188,6 +189,10 @@ public:
 
 	void SetStartedFlg(bool bFlg);
 
+	// Šm”F—p
+	void PlayEngineAudio();
+	void StopEngineAudio();
+
 public:
 	UPROPERTY(VisibleAnywhere, Category = "CarRace")
 	int32 CurrentLapCount = 0;
@@ -197,5 +202,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "CarRace")
 	bool bRaceStarted = false;
+
+	UPROPERTY(EditAnywhere, Category = "CarRace")
+	UAudioComponent* EngineAudio;
 
 };

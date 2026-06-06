@@ -44,6 +44,10 @@ ACarRacePawn::ACarRacePawn()
 	BackCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("Back Camera"));
 	BackCamera->SetupAttachment(BackSpringArm);
 
+	EngineAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("EngineAudio"));
+	EngineAudio->SetupAttachment(GetMesh());
+	//EngineAudio->bAutoActivate = true;
+
 	// Configure the car mesh
 	GetMesh()->SetSimulatePhysics(true);
 	GetMesh()->SetCollisionProfileName(FName("Vehicle"));
@@ -282,5 +286,37 @@ void ACarRacePawn::SetStartedFlg(bool bFlg)
 {
 	bRaceStarted = bFlg;
 }
+
+void ACarRacePawn::PlayEngineAudio()
+{	
+	//if (EngineAudio->Sound) {
+	//	UE_LOG(LogTemp, Display, TEXT("Engine Audio Sound Exists"));
+	//}
+	//else {
+	//	UE_LOG(LogTemp, Display, TEXT("Engine Audio Sound NOT Exists"));
+	//}
+
+	//if (EngineAudio->IsPlaying()) {
+	//	UE_LOG(LogTemp, Display, TEXT("Engine Audio Playing"));
+	//}
+	//else {
+	//	UE_LOG(LogTemp, Display, TEXT("Engine Audio NOT Playing"));
+	//}
+
+	EngineAudio->Play();
+	if (EngineAudio->IsPlaying()) {
+		UE_LOG(LogTemp, Display, TEXT("Engine Audio Playing"));
+	}
+	else {
+		UE_LOG(LogTemp, Display, TEXT("Engine Audio NOT Playing"));
+	}
+	
+}
+
+void ACarRacePawn::StopEngineAudio()
+{
+	EngineAudio->Stop();
+}
+
 
 #undef LOCTEXT_NAMESPACE

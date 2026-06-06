@@ -35,15 +35,25 @@ public:
 	UScreenMessage* ScreenMessageWidget;
 
 	UPROPERTY(EditAnywhere)
-	int32 CountdownDelay = 3;
+	int32 CountdownDelay = 7;
 
 	int32 CountdownSeconds;
 
 	FTimerHandle CountdownTimerHandle;
 
+	// サウンド
+	// レース中のBGMサウンド
 	UPROPERTY(EditAnywhere)
 	USoundBase* RaceBGM;
+
+	// カウントダウンサウンド
+	UPROPERTY(EditAnywhere)
+	USoundBase* CountdownCountSound;
+
+	UPROPERTY(EditAnywhere)
+	USoundBase* CountdownStartSound;
 	
+
 	UPROPERTY(VisibleAnywhere)
 	TArray<AActor*> TrackGateArray;
 

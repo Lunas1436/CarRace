@@ -61,14 +61,16 @@ void ACarRaceGameMode::BeginPlay()
 
 	CountdownSeconds = CountdownDelay;
 	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &ACarRaceGameMode::OnCountdownTimerTimeout, 1.0f, true);
-	
 
-	// BGM
-	UGameplayStatics::PlaySound2D(
-		GetWorld(),
-		RaceBGM
-	);
 
+	// 確認用
+	// スタート前のエンジン音
+	if (PlayerController) {
+		ACarRacePawn* Car = Cast<ACarRacePawn>(PlayerController->GetPawn()); // メンバに持つ
+		if (Car) {
+			Car->PlayEngineAudio();
+		}
+	}
 }
 
 // Called every frame
@@ -80,8 +82,14 @@ void ACarRaceGameMode::Tick(float DeltaTime)
 
 void ACarRaceGameMode::OnCountdownTimerTimeout()
 {
-	if (CountdownSeconds > 0) {
+	//if (CountdownSeconds > 0) {
+	if (0 < CountdownSeconds && CountdownSeconds < 4) {
 		ScreenMessageWidget->SetMessageText(FString::FromInt(CountdownSeconds));
+		// カウントダウンサウンド
+		UGameplayStatics::PlaySound2D(GetWorld(), CountdownCountSound);
+	}
+	else if (CountdownSeconds >= 4) {
+		UE_LOG(LogTemp, Display, TEXT("Engine Audio"));
 	}
 	else if (CountdownSeconds == 0) {
 		APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
@@ -89,10 +97,18 @@ void ACarRaceGameMode::OnCountdownTimerTimeout()
 			ACarRacePawn *Car = Cast<ACarRacePawn>(PlayerController->GetPawn());
 			if (Car) {
 				Car->SetStartedFlg(true);
+				// 確認用
+				Car->StopEngineAudio();
 			}
 		}
 
-		ScreenMessageWidget->SetMessageText("Get Ready?");
+		ScreenMessageWidget->SetMessageText("Go!");
+
+		// カウントダウンサウンド
+		UGameplayStatics::PlaySound2D(GetWorld(), CountdownStartSound);
+
+		// レース中のBGM
+		UGameplayStatics::PlaySound2D(GetWorld(), RaceBGM);
 	}
 	else {
 		GetWorldTimerManager().ClearTimer(CountdownTimerHandle);
