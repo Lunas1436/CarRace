@@ -3,6 +3,7 @@
 #include "CarRaceGameMode.h"
 #include "CarRacePlayerController.h"
 
+
 ACarRaceGameMode::ACarRaceGameMode()
 {
 	PlayerControllerClass = ACarRacePlayerController::StaticClass();
@@ -41,7 +42,7 @@ void ACarRaceGameMode::BeginPlay()
 				if (Gate) {
 					Gate->SetGateIndex(i);
 					Gate->SetGateCount(TrackGateCount);
-					Gate->MaxLap = 1;
+					Gate->MaxLap = 3;
 					if (i == 0) {
 						Gate->SetIsFinieshGate(true);
 					}
@@ -62,8 +63,6 @@ void ACarRaceGameMode::BeginPlay()
 	CountdownSeconds = CountdownDelay;
 	GetWorldTimerManager().SetTimer(CountdownTimerHandle, this, &ACarRaceGameMode::OnCountdownTimerTimeout, 1.0f, true);
 
-
-	// 確認用
 	// スタート前のエンジン音
 	if (PlayerController) {
 		ACarRacePawn* Car = Cast<ACarRacePawn>(PlayerController->GetPawn()); // メンバに持つ
@@ -71,13 +70,14 @@ void ACarRaceGameMode::BeginPlay()
 			Car->PlayEngineAudio();
 		}
 	}
+
+	UCarRaceUI* HUD = Cast<UCarRaceUI>(PlayerController->GetHUD());
 }
 
 // Called every frame
 void ACarRaceGameMode::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void ACarRaceGameMode::OnCountdownTimerTimeout()
@@ -97,12 +97,13 @@ void ACarRaceGameMode::OnCountdownTimerTimeout()
 			ACarRacePawn *Car = Cast<ACarRacePawn>(PlayerController->GetPawn());
 			if (Car) {
 				Car->SetStartedFlg(true);
-				// 確認用
 				Car->StopEngineAudio();
 			}
 		}
 
 		ScreenMessageWidget->SetMessageText("Go!");
+		StartTime = GetWorld()->GetTimeSeconds();
+		GetWorldTimerManager().SetTimer(ElapsedTimerHandle, this, &ACarRaceGameMode::OnCountElapsedTimer, 1.0f, true);
 
 		// カウントダウンサウンド
 		UGameplayStatics::PlaySound2D(GetWorld(), CountdownStartSound);
@@ -116,4 +117,18 @@ void ACarRaceGameMode::OnCountdownTimerTimeout()
 	}
 
 	CountdownSeconds--;
+}
+
+void ACarRaceGameMode::OnCountElapsedTimer()
+{
+	float Elapsed = GetWorld()->GetTimeSeconds() - StartTime;
+}
+
+void ACarRaceGameMode::OnRaceFinish()
+{
+	if (ScreenMessageWidget) {
+		ScreenMessageWidget->SetVisibility(ESlateVisibility::Visible);
+		ScreenMessageWidget->SetMessageText("Finish!");
+	}
+
 }

@@ -2,6 +2,7 @@
 
 
 #include "TrackGate.h"
+#include "CarRaceGameMode.h"
 
 // Sets default values
 ATrackGate::ATrackGate()
@@ -61,6 +62,7 @@ void ATrackGate::SetIsFinieshGate(bool bFlg)
 	bIsFinishGate = bFlg;
 }
 
+// ÉQÅ[Égí âﬂ
 void ATrackGate::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex,
 	bool bFromSweep, const FHitResult& SweepResult)
@@ -102,7 +104,13 @@ void ATrackGate::ProcessLapCount(ACarRacePawn* OtherActor)
 // ÉSÅ[ÉãîªíË
 void ATrackGate::ProcessRaceFinish()
 {
-	UE_LOG(LogTemp, Display, TEXT("Race Finish!!"));
+	AGameModeBase *GameMode = UGameplayStatics::GetGameMode(GetWorld());
+	if (GameMode) {
+		ACarRaceGameMode* CRGameMode = Cast<ACarRaceGameMode>(GameMode);
+		if (CRGameMode) {
+			CRGameMode->OnRaceFinish();
+		}
+	}
 }
 
 

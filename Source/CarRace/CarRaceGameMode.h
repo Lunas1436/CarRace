@@ -27,6 +27,8 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	void OnCountdownTimerTimeout();
+	void OnCountElapsedTimer();
+	void OnRaceFinish();
 
 public:
 	UPROPERTY(EditAnywhere)
@@ -38,8 +40,10 @@ public:
 	int32 CountdownDelay = 7;
 
 	int32 CountdownSeconds;
-
 	FTimerHandle CountdownTimerHandle;
+
+	float StartTime = 0.0f;
+	FTimerHandle ElapsedTimerHandle;
 
 	// サウンド
 	// レース中のBGMサウンド

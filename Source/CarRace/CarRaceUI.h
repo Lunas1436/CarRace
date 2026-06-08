@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/TextBlock.h"
 #include "CarRaceUI.generated.h"
 
 /**
@@ -30,6 +31,8 @@ public:
 	/** Called to update the gear display */
 	void UpdateGear(int32 NewGear);
 
+	void UpdateTimer(float ElapsedTime);
+
 protected:
 
 	/** Implemented in Blueprint to display the new speed */
@@ -39,4 +42,13 @@ protected:
 	/** Implemented in Blueprint to display the new gear */
 	UFUNCTION(BlueprintImplementableEvent, Category="Vehicle")
 	void OnGearUpdate(int32 NewGear);
+
+	
+	UFUNCTION(BlueprintImplementableEvent, Category = "Vehicle")
+	void OnTimerUpdate(float ElapsedTime);
+
+public:
+	UPROPERTY(EditAnywhere, meta = (BindWidget))
+	UTextBlock* TimerText;
+
 };

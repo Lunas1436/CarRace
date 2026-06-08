@@ -46,7 +46,7 @@ ACarRacePawn::ACarRacePawn()
 
 	EngineAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("EngineAudio"));
 	EngineAudio->SetupAttachment(GetMesh());
-	//EngineAudio->bAutoActivate = true;
+	EngineAudio->bAutoActivate = false;
 
 	// Configure the car mesh
 	GetMesh()->SetSimulatePhysics(true);
@@ -289,33 +289,18 @@ void ACarRacePawn::SetStartedFlg(bool bFlg)
 
 void ACarRacePawn::PlayEngineAudio()
 {	
-	//if (EngineAudio->Sound) {
-	//	UE_LOG(LogTemp, Display, TEXT("Engine Audio Sound Exists"));
-	//}
-	//else {
-	//	UE_LOG(LogTemp, Display, TEXT("Engine Audio Sound NOT Exists"));
-	//}
-
-	//if (EngineAudio->IsPlaying()) {
-	//	UE_LOG(LogTemp, Display, TEXT("Engine Audio Playing"));
-	//}
-	//else {
-	//	UE_LOG(LogTemp, Display, TEXT("Engine Audio NOT Playing"));
-	//}
-
 	EngineAudio->Play();
+}
+
+void ACarRacePawn::StopEngineAudio()
+{
+	EngineAudio->Stop();
 	if (EngineAudio->IsPlaying()) {
 		UE_LOG(LogTemp, Display, TEXT("Engine Audio Playing"));
 	}
 	else {
 		UE_LOG(LogTemp, Display, TEXT("Engine Audio NOT Playing"));
 	}
-	
-}
-
-void ACarRacePawn::StopEngineAudio()
-{
-	EngineAudio->Stop();
 }
 
 
