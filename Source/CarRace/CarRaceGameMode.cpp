@@ -42,7 +42,7 @@ void ACarRaceGameMode::BeginPlay()
 				if (Gate) {
 					Gate->SetGateIndex(i);
 					Gate->SetGateCount(TrackGateCount);
-					Gate->MaxLap = 3;
+					Gate->MaxLap = 1;
 					if (i == 0) {
 						Gate->SetIsFinieshGate(true);
 					}
@@ -111,7 +111,7 @@ void ACarRaceGameMode::OnCountdownTimerTimeout()
 			int aaa = 100;
 		}
 		StartTime = GetWorld()->GetTimeSeconds();
-		GetWorldTimerManager().SetTimer(ElapsedTimerHandle, this, &ACarRaceGameMode::OnCountElapsedTimer, 1.0f, true);
+		GetWorldTimerManager().SetTimer(ElapsedTimerHandle, this, &ACarRaceGameMode::OnCountElapsedTimer, 0.001f, true);
 
 		// カウントダウンサウンド
 		UGameplayStatics::PlaySound2D(GetWorld(), CountdownStartSound);
@@ -140,4 +140,5 @@ void ACarRaceGameMode::OnRaceFinish()
 		ScreenMessageWidget->SetMessageText("Finish!");
 	}
 
+	GetWorldTimerManager().ClearTimer(ElapsedTimerHandle);
 }
