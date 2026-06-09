@@ -70,8 +70,6 @@ void ACarRaceGameMode::BeginPlay()
 			Car->PlayEngineAudio();
 		}
 	}
-
-	UCarRaceUI* HUD = Cast<UCarRaceUI>(PlayerController->GetHUD());
 }
 
 // Called every frame
@@ -102,6 +100,16 @@ void ACarRaceGameMode::OnCountdownTimerTimeout()
 		}
 
 		ScreenMessageWidget->SetMessageText("Go!");
+		ACarRacePlayerController* PC = Cast<ACarRacePlayerController>(PlayerController);
+		if (PC) {
+			RaceTime = PC->GetVehicleUI();
+		}
+		if (RaceTime) {
+			int aaa = 100;
+		}
+		else {
+			int aaa = 100;
+		}
 		StartTime = GetWorld()->GetTimeSeconds();
 		GetWorldTimerManager().SetTimer(ElapsedTimerHandle, this, &ACarRaceGameMode::OnCountElapsedTimer, 1.0f, true);
 
@@ -122,6 +130,7 @@ void ACarRaceGameMode::OnCountdownTimerTimeout()
 void ACarRaceGameMode::OnCountElapsedTimer()
 {
 	float Elapsed = GetWorld()->GetTimeSeconds() - StartTime;
+	RaceTime->UpdateElapsedTimer(Elapsed);
 }
 
 void ACarRaceGameMode::OnRaceFinish()

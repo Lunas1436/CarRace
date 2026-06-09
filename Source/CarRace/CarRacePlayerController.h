@@ -81,4 +81,8 @@ protected:
 	/** Handles pawn destruction and respawning */
 	UFUNCTION()
 	void OnPawnDestroyed(AActor* DestroyedPawn);
+
+public:
+	FORCEINLINE UCarRaceUI* GetVehicleUI() { return VehicleUI; }
+
 };

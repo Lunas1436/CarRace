@@ -18,12 +18,12 @@ void UCarRaceUI::UpdateGear(int32 NewGear)
 	OnGearUpdate(NewGear);
 }
 
-void UCarRaceUI::UpdateTimer(float ElapsedTime)
+void UCarRaceUI::UpdateElapsedTimer(float ElapsedTime)
 {
-	OnTimerUpdate(ElapsedTime);
+	OnElapsedTimerUpdate(ElapsedTime);
 }
 
-void UCarRaceUI::OnTimerUpdate(float ElapsedTime)
+void UCarRaceUI::OnElapsedTimerUpdate(float ElapsedTime)
 {
 	int32 Minutes = ElapsedTime / 60;
 	int32 Seconds = (int32)ElapsedTime % 60;
@@ -36,7 +36,12 @@ void UCarRaceUI::OnTimerUpdate(float ElapsedTime)
 		Milli
 	);
 
-	TimerText->SetText(FText::FromString(UpdateTime));
+	if (TimerText) {
+		TimerText->SetText(FText::FromString(UpdateTime));
+	}
+	else {
+		int aaa = 100;
+	}
 }
 
 

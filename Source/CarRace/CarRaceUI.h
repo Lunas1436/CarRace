@@ -13,7 +13,7 @@
  *  Widget setup is handled in a Blueprint subclass.
  */
 UCLASS(abstract)
-class UCarRaceUI : public UUserWidget
+class CARRACE_API UCarRaceUI : public UUserWidget
 {
 	GENERATED_BODY()
 	
@@ -31,7 +31,7 @@ public:
 	/** Called to update the gear display */
 	void UpdateGear(int32 NewGear);
 
-	void UpdateTimer(float ElapsedTime);
+	void UpdateElapsedTimer(float ElapsedTime);
 
 protected:
 
@@ -44,8 +44,8 @@ protected:
 	void OnGearUpdate(int32 NewGear);
 
 	
-	UFUNCTION(BlueprintImplementableEvent, Category = "Vehicle")
-	void OnTimerUpdate(float ElapsedTime);
+	UFUNCTION()
+	void OnElapsedTimerUpdate(float ElapsedTime);
 
 public:
 	UPROPERTY(EditAnywhere, meta = (BindWidget))

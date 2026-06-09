@@ -8,6 +8,7 @@
 #include "ScreenMessage.h"
 #include "CourseSpline.h"
 #include "TrackGate.h"
+#include "CarRaceUI.h"
 #include "CarRaceGameMode.generated.h"
 
 UCLASS(abstract)
@@ -44,6 +45,7 @@ public:
 
 	float StartTime = 0.0f;
 	FTimerHandle ElapsedTimerHandle;
+	UCarRaceUI* RaceTime;
 
 	// サウンド
 	// レース中のBGMサウンド
