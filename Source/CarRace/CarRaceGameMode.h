@@ -30,6 +30,7 @@ public:
 	void OnCountdownTimerTimeout();
 	void OnCountElapsedTimer();
 	void OnRaceFinish();
+	void OnGameFinish();
 
 public:
 	UPROPERTY(EditAnywhere)

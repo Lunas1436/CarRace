@@ -104,12 +104,7 @@ void ACarRaceGameMode::OnCountdownTimerTimeout()
 		if (PC) {
 			RaceTime = PC->GetVehicleUI();
 		}
-		if (RaceTime) {
-			int aaa = 100;
-		}
-		else {
-			int aaa = 100;
-		}
+
 		StartTime = GetWorld()->GetTimeSeconds();
 		GetWorldTimerManager().SetTimer(ElapsedTimerHandle, this, &ACarRaceGameMode::OnCountElapsedTimer, 0.001f, true);
 
@@ -141,4 +136,17 @@ void ACarRaceGameMode::OnRaceFinish()
 	}
 
 	GetWorldTimerManager().ClearTimer(ElapsedTimerHandle);
+
+	// レース終了して3秒後にOnGameFinishを実行
+	FTimerHandle GameFinishTimerHandle;
+	float GameFinishDelay = 3.0f;
+	GetWorldTimerManager().SetTimer(GameFinishTimerHandle, this, &ACarRaceGameMode::OnGameFinish, GameFinishDelay, false);
+
+}
+
+void ACarRaceGameMode::OnGameFinish()
+{
+	FString CurrentLevelName = UGameplayStatics::GetCurrentLevelName(GetWorld());
+	UGameplayStatics::OpenLevel(GetWorld(), *CurrentLevelName);
+	UE_LOG(LogTemp, Display, TEXT("ReStartLevel"));
 }
