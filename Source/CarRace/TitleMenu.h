@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/Button.h"
 #include "TitleMenu.generated.h"
 
 /**
@@ -14,4 +15,16 @@ class CARRACE_API UTitleMenu : public UUserWidget
 {
 	GENERATED_BODY()
 	
+public:
+	virtual void NativeConstruct() override;
+
+public:
+	UFUNCTION()
+	void OnGameStartButtonClicked();
+
+public:
+	UPROPERTY(meta = (BindWidget))
+	UButton* Btn_GameStart;
+		
+
 };
