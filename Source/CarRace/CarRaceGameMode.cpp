@@ -124,8 +124,25 @@ void ACarRaceGameMode::OnCountdownTimerTimeout()
 
 void ACarRaceGameMode::OnCountElapsedTimer()
 {
-	float Elapsed = GetWorld()->GetTimeSeconds() - StartTime;
-	RaceTime->UpdateElapsedTimer(Elapsed);
+	ElapsedTime = FormatTime(GetWorld()->GetTimeSeconds() - StartTime);
+	RaceTime->UpdateElapsedTimer(ElapsedTime);
+}
+
+FText ACarRaceGameMode::FormatTime(float Time)
+{
+	int32 Minutes = Time / 60;
+	int32 Seconds = (int32)Time % 60;
+	int32 Milli = (Time - (int32)Time) * 1000;
+
+	FString FormattedTime = FString::Printf(
+		TEXT("%02d:%02d:%03d"),
+		Minutes,
+		Seconds,
+		Milli
+	);
+	
+	FText Result = FText::FromString(FormattedTime);
+	return Result;
 }
 
 void ACarRaceGameMode::OnRaceFinish()
@@ -146,7 +163,20 @@ void ACarRaceGameMode::OnRaceFinish()
 
 void ACarRaceGameMode::OnGameFinish()
 {
-	FString CurrentLevelName = UGameplayStatics::GetCurrentLevelName(GetWorld());
-	UGameplayStatics::OpenLevel(GetWorld(), *CurrentLevelName);
-	UE_LOG(LogTemp, Display, TEXT("ReStartLevel"));
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+	if (PlayerController) {
+		if (ScreenMessageWidget) {
+			ScreenMessageWidget->SetVisibility(ESlateVisibility::Hidden);
+		}
+		// Šm”F—p
+		if (RaceTime) {
+			RaceTime->SetTimerTextVisibility(false);
+		}
+
+		RaceResultWidget = CreateWidget<URaceResult>(PlayerController, RaceResultClass);
+		if (RaceResultWidget) {
+			RaceResultWidget->AddToPlayerScreen();
+			RaceResultWidget->SetRecordText(ElapsedTime);
+		}
+	}
 }

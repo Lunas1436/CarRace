@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "ScreenMessage.h"
+#include "RaceResult.h"
 #include "CourseSpline.h"
 #include "TrackGate.h"
 #include "CarRaceUI.h"
@@ -32,11 +33,20 @@ public:
 	void OnRaceFinish();
 	void OnGameFinish();
 
+	FText FormatTime(float Time);
+
 public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UScreenMessage> ScreenMessageClass;
 
 	UScreenMessage* ScreenMessageWidget;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<URaceResult> RaceResultClass;
+
+	URaceResult* RaceResultWidget;
+
+	FText ElapsedTime;
 
 	UPROPERTY(EditAnywhere)
 	int32 CountdownDelay = 7;
@@ -63,8 +73,6 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	TArray<AActor*> TrackGateArray;
-
-
 
 };
 

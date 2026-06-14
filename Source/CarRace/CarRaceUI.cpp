@@ -18,29 +18,25 @@ void UCarRaceUI::UpdateGear(int32 NewGear)
 	OnGearUpdate(NewGear);
 }
 
-void UCarRaceUI::UpdateElapsedTimer(float ElapsedTime)
+void UCarRaceUI::UpdateElapsedTimer(FText ElapsedTime)
 {
 	OnElapsedTimerUpdate(ElapsedTime);
 }
 
-void UCarRaceUI::OnElapsedTimerUpdate(float ElapsedTime)
+void UCarRaceUI::OnElapsedTimerUpdate(FText ElapsedTime)
 {
-	int32 Minutes = ElapsedTime / 60;
-	int32 Seconds = (int32)ElapsedTime % 60;
-	int32 Milli = (ElapsedTime - (int32)ElapsedTime) * 1000;
-
-	FString UpdateTime = FString::Printf(
-		TEXT("%02d:%02d:%03d"),
-		Minutes,
-		Seconds,
-		Milli
-	);
-
 	if (TimerText) {
-		TimerText->SetText(FText::FromString(UpdateTime));
+		TimerText->SetText(ElapsedTime);
+	}
+}
+
+void UCarRaceUI::SetTimerTextVisibility(bool bVisible)
+{
+	if (bVisible) {
+		TimerText->SetVisibility(ESlateVisibility::Visible);
 	}
 	else {
-		int aaa = 100;
+		TimerText->SetVisibility(ESlateVisibility::Hidden);
 	}
 }
 

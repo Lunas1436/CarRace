@@ -31,7 +31,8 @@ public:
 	/** Called to update the gear display */
 	void UpdateGear(int32 NewGear);
 
-	void UpdateElapsedTimer(float ElapsedTime);
+	void UpdateElapsedTimer(FText ElapsedTime);
+	void SetTimerTextVisibility(bool bVisible);
 
 protected:
 
@@ -43,9 +44,9 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, Category="Vehicle")
 	void OnGearUpdate(int32 NewGear);
 
-	
+
 	UFUNCTION()
-	void OnElapsedTimerUpdate(float ElapsedTime);
+	void OnElapsedTimerUpdate(FText ElapsedTime);
 
 public:
 	UPROPERTY(EditAnywhere, meta = (BindWidget))

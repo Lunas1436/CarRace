@@ -15,7 +15,8 @@ void UTitleMenu::NativeConstruct()
 void UTitleMenu::OnGameStartButtonClicked()
 {
 	FString Currentlvl = GetWorld()->GetName();
-	FString Nextlvl = TEXT("Course1");
-	UE_LOG(LogTemp, Display, TEXT("lvlname %s"), *Nextlvl);
-	UGameplayStatics::OpenLevel(GetWorld(), TEXT("Course1"));
+	//FString Nextlvl = TEXT("Course1");
+	FName Nextlvl = FName("Course1");
+	UE_LOG(LogTemp, Display, TEXT("lvlname %s"), *Currentlvl);
+	UGameplayStatics::OpenLevel(GetWorld(), Nextlvl);
 }
