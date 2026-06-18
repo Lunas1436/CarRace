@@ -10,6 +10,7 @@ void UTitleMenu::NativeConstruct()
 		Btn_GameStart->OnClicked.AddDynamic(this, &UTitleMenu::OnGameStartButtonClicked);
 	}
 
+
 }
 
 void UTitleMenu::OnGameStartButtonClicked()

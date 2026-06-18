@@ -14,7 +14,7 @@ UCLASS()
 class CARRACE_API UTitleMenu : public UUserWidget
 {
 	GENERATED_BODY()
-	
+
 public:
 	virtual void NativeConstruct() override;
 
