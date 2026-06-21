@@ -59,6 +59,10 @@ protected:
 
 	/** Pointer to the UI widget */
 	TObjectPtr<UCarRaceUI> VehicleUI;
+
+
+
+
 		
 protected:
 
