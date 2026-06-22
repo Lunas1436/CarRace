@@ -21,6 +21,7 @@ void ATitleGameMode::BeginPlay()
 		TitleMenuWidget = CreateWidget<UTitleMenu>(PC, TitleMenuClass);
 		if (TitleMenuWidget) {
 			TitleMenuWidget->AddToViewport();
+			TitleMenuWidget->InitButton();
 		}
 	}
 

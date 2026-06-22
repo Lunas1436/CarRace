@@ -22,6 +22,8 @@ public:
 	UFUNCTION()
 	void OnGameStartButtonClicked();
 
+	void InitButton();
+
 public:
 	UPROPERTY(meta = (BindWidget))
 	UButton* Btn_GameStart;

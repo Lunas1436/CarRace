@@ -10,7 +10,6 @@ void UTitleMenu::NativeConstruct()
 	if (Btn_GameStart) {
 		Btn_GameStart->OnClicked.AddDynamic(this, &UTitleMenu::OnGameStartButtonClicked);
 		Btn_GameStart->IsFocusable = true;
-		Btn_GameStart->SetKeyboardFocus();
 	}
 
 	APlayerController* PC = GetOwningPlayer();
@@ -28,4 +27,11 @@ void UTitleMenu::OnGameStartButtonClicked()
 	UE_LOG(LogTemp, Display, TEXT("lvlname %s"), *Currentlvl);
 	FName Nextlvl = FName("Course1");
 	UGameplayStatics::OpenLevel(GetWorld(), Nextlvl);
+}
+
+void UTitleMenu::InitButton()
+{
+	if (Btn_GameStart) {
+		Btn_GameStart->SetUserFocus(GetOwningPlayer());
+	}
 }
