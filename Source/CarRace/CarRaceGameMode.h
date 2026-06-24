@@ -70,7 +70,6 @@ public:
 	UPROPERTY(EditAnywhere)
 	USoundBase* CountdownStartSound;
 	
-
 	UPROPERTY(VisibleAnywhere)
 	TArray<AActor*> TrackGateArray;
 

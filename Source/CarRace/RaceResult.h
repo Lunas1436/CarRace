@@ -28,7 +28,7 @@ public:
 
 public:
 	UPROPERTY(EditAnywhere, meta = (BindWidget))
-	UTextBlock* RecordText;
+	UTextBlock* ResultText;
 
 	UPROPERTY(meta = (BindWidget))
 	UButton* Btn_QuitGame;

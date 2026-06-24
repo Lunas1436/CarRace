@@ -29,5 +29,5 @@ void URaceResult::OnNextCourseButtonClicked()
 
 void URaceResult::SetRecordText(FText Record)
 {
-	RecordText->SetText(Record);
+	ResultText->SetText(Record);
 }

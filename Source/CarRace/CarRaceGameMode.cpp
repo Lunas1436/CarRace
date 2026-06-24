@@ -103,7 +103,7 @@ void ACarRaceGameMode::OnCountdownTimerTimeout()
 		ACarRacePlayerController* PC = Cast<ACarRacePlayerController>(PlayerController);
 		if (PC) {
 			RaceTime = PC->GetVehicleUI();
-			RaceTime->SetTimerTextVisibility(false);
+			RaceTime->SetTimerTextVisibility(true);
 		}
 
 		StartTime = GetWorld()->GetTimeSeconds();
