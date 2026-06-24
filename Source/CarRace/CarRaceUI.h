@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/TextBlock.h"
 #include "CarRaceUI.generated.h"
 
 /**
@@ -12,7 +13,7 @@
  *  Widget setup is handled in a Blueprint subclass.
  */
 UCLASS(abstract)
-class UCarRaceUI : public UUserWidget
+class CARRACE_API UCarRaceUI : public UUserWidget
 {
 	GENERATED_BODY()
 	
@@ -30,6 +31,9 @@ public:
 	/** Called to update the gear display */
 	void UpdateGear(int32 NewGear);
 
+	void UpdateElapsedTimer(FText ElapsedTime);
+	void SetTimerTextVisibility(bool bVisible);
+
 protected:
 
 	/** Implemented in Blueprint to display the new speed */
@@ -39,4 +43,13 @@ protected:
 	/** Implemented in Blueprint to display the new gear */
 	UFUNCTION(BlueprintImplementableEvent, Category="Vehicle")
 	void OnGearUpdate(int32 NewGear);
+
+
+	UFUNCTION()
+	void OnElapsedTimerUpdate(FText ElapsedTime);
+
+public:
+	UPROPERTY(EditAnywhere, meta = (BindWidget))
+	UTextBlock* TimerText;
+
 };

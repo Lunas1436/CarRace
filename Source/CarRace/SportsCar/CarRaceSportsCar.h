@@ -17,4 +17,5 @@ class ACarRaceSportsCar : public ACarRacePawn
 public:
 
 	ACarRaceSportsCar();
+
 };

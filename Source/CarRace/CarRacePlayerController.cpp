@@ -15,6 +15,11 @@
 void ACarRacePlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// タイトル画面から引き継がれる入力設定をリセット
+	FInputModeGameOnly InputMode;
+	SetInputMode(InputMode);
+	bShowMouseCursor = false;
 	
 	// only spawn UI on local player controllers
 	if (IsLocalPlayerController())

@@ -17,3 +17,27 @@ void UCarRaceUI::UpdateGear(int32 NewGear)
 	// call the Blueprint handler
 	OnGearUpdate(NewGear);
 }
+
+void UCarRaceUI::UpdateElapsedTimer(FText ElapsedTime)
+{
+	OnElapsedTimerUpdate(ElapsedTime);
+}
+
+void UCarRaceUI::OnElapsedTimerUpdate(FText ElapsedTime)
+{
+	if (TimerText) {
+		TimerText->SetText(ElapsedTime);
+	}
+}
+
+void UCarRaceUI::SetTimerTextVisibility(bool bVisible)
+{
+	if (bVisible) {
+		TimerText->SetVisibility(ESlateVisibility::Visible);
+	}
+	else {
+		TimerText->SetVisibility(ESlateVisibility::Hidden);
+	}
+}
+
+

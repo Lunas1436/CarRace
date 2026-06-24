@@ -44,6 +44,10 @@ ACarRacePawn::ACarRacePawn()
 	BackCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("Back Camera"));
 	BackCamera->SetupAttachment(BackSpringArm);
 
+	EngineAudio = CreateDefaultSubobject<UAudioComponent>(TEXT("EngineAudio"));
+	EngineAudio->SetupAttachment(GetMesh());
+	EngineAudio->bAutoActivate = false;
+
 	// Configure the car mesh
 	GetMesh()->SetSimulatePhysics(true);
 	GetMesh()->SetCollisionProfileName(FName("Vehicle"));
@@ -114,6 +118,9 @@ void ACarRacePawn::Steering(const FInputActionValue& Value)
 
 void ACarRacePawn::Throttle(const FInputActionValue& Value)
 {
+	// Šm”F—p
+	if (!bRaceStarted) return;
+
 	// route the input
 	DoThrottle(Value.Get<float>());
 }
@@ -254,5 +261,47 @@ void ACarRacePawn::DoResetVehicle()
 	GetMesh()->SetPhysicsAngularVelocityInDegrees(FVector::ZeroVector);
 	GetMesh()->SetPhysicsLinearVelocity(FVector::ZeroVector);
 }
+
+void ACarRacePawn::SetCurrentLapCount(int32 LapCount)
+{
+	CurrentLapCount = LapCount;
+}
+
+int32 ACarRacePawn::GetCurrentLapCount()
+{
+	return CurrentLapCount;
+}
+
+void ACarRacePawn::SetCurrentGateIndex(int32 GateIndex)
+{
+	CurrentGateIndex = GateIndex;
+}
+
+int32 ACarRacePawn::GetCurrentGateIndex()
+{
+	return CurrentGateIndex;
+}
+
+void ACarRacePawn::SetStartedFlg(bool bFlg)
+{
+	bRaceStarted = bFlg;
+}
+
+void ACarRacePawn::PlayEngineAudio()
+{	
+	EngineAudio->Play();
+}
+
+void ACarRacePawn::StopEngineAudio()
+{
+	EngineAudio->Stop();
+	if (EngineAudio->IsPlaying()) {
+		UE_LOG(LogTemp, Display, TEXT("Engine Audio Playing"));
+	}
+	else {
+		UE_LOG(LogTemp, Display, TEXT("Engine Audio NOT Playing"));
+	}
+}
+
 
 #undef LOCTEXT_NAMESPACE

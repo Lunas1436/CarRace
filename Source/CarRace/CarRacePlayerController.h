@@ -59,6 +59,10 @@ protected:
 
 	/** Pointer to the UI widget */
 	TObjectPtr<UCarRaceUI> VehicleUI;
+
+
+
+
 		
 protected:
 
@@ -81,4 +85,8 @@ protected:
 	/** Handles pawn destruction and respawning */
 	UFUNCTION()
 	void OnPawnDestroyed(AActor* DestroyedPawn);
+
+public:
+	FORCEINLINE UCarRaceUI* GetVehicleUI() { return VehicleUI; }
+
 };
